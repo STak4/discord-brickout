@@ -47,16 +47,18 @@ function App() {
       throw new Error("Authenticate command failed");
     }
 
-    // // ユーザー情報の取得
-    // const user: { username: string } = await fetch(
-    //   `https://discord.com/api/users/@me`,
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${auth.access_token}`,
-    //       "Content-Type": "application/json",
-    //     },
-    //   }
-    // ).then((reply) => reply.json());
+    // ユーザー情報の取得
+    const user: { username: string } = await fetch(
+      `https://discord.com/api/users/@me`,
+      {
+        headers: {
+          Authorization: `Bearer ${auth.access_token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((reply) => reply.json());
+
+    console.log(`[Debug]名前:${user.username}`);
 
     // // ユーザー名の設定
     // setUserName(user.username);
