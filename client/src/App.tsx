@@ -22,7 +22,10 @@ function App() {
       response_type: "code",
       state: "",
       prompt: "none",
-      scope: ["identify"],
+      scope: [
+        "identify",
+        "guilds"
+      ],
     });
 
     // サーバーからaccess_tokenを取得
@@ -47,8 +50,23 @@ function App() {
       throw new Error("Authenticate command failed");
     }
 
+    // チャンネル名の取得
+    let activityChannelName = 'Unknown';
+    // Requesting the channel in GDMs (when the guild ID is null) requires
+    // the dm_channels.read scope which requires Discord approval.
+    if (discordSdk.channelId != null && discordSdk.guildId != null) {
+      // Over RPC collect info about the channel
+      const channel = await discordSdk.commands.getChannel({channel_id: discordSdk.channelId});
+      if (channel.name != null) {
+        activityChannelName = channel.name;
+      }
+    }
+    console.log(`[Debug]チャンネル:${activityChannelName}`);
+  
+    await discordSdk.commands.getInstanceConnectedParticipants()
+
     // ユーザー情報の取得
-    const user: { username: string } = await fetch(
+    const user: { global_name: string } = await fetch(
       `https://discord.com/api/users/@me`,
       {
         headers: {
@@ -58,10 +76,10 @@ function App() {
       }
     ).then((reply) => reply.json());
 
-    console.log(`[Debug]名前:${user.username}`);
+    console.log(`[Debug]名前:${user.global_name}`);
 
-    // // ユーザー名の設定
-    // setUserName(user.username);
+    // ユーザー名の設定
+    //setUserName(user.global_name);
   }
 
   return <UnityComponent userName={userName} />;
