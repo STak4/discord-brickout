@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 
-interface UnityCompoonentProps {
+interface UnityComponentProps {
   userName: string;
 }
 
-const UnityComponent = (props: UnityCompoonentProps) => {
+const UnityComponent = (props: UnityComponentProps) => {
   // UnityContextを準備、表示するUniyアプリを指定
   const { unityProvider, sendMessage, isLoaded } = useUnityContext({
     loaderUrl: "Build/Builds.loader.js",
@@ -20,7 +20,8 @@ const UnityComponent = (props: UnityCompoonentProps) => {
     if (isLoaded) {
       // Unityアプリに対してメッセージを送信
       // sendMessage("オブジェクト名", "関数名", 引数)
-      sendMessage("Canvas", "SetText", props.userName);
+      sendMessage("EntryPoint", "ReceiveMessage", props.userName);
+      console.log(`[Debug]SendMessage:${props.userName}`);
     }
   }, [isLoaded]);
 

@@ -79,7 +79,7 @@ function App() {
     console.log(`[Debug]名前:${user.global_name}`);
 
     // ユーザー名の設定
-    //setUserName(user.global_name);
+    setUserName(user.global_name);
   }
 
   return <UnityComponent userName={userName} />;
