@@ -9,6 +9,7 @@ public class MessageTest : MonoBehaviour
     
     public void ReceiveMessage(string msg)
     {
-        Debug.Log($"[MessageTest] Received Message:{msg}");
+        Debug.Log($"[Debug][MessageTest] Received Message:{msg}");
+        OnReceivedMessage?.Invoke(msg);
     }
 }
