@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MessageTest : MonoBehaviour
+namespace STak4.brickout
 {
-    public UnityEvent<string> OnReceivedMessage = new UnityEvent<string>();
-    
-    public void ReceiveMessage(string msg)
+    public class MessageTest : MonoBehaviour
     {
-        Debug.Log($"[Debug][MessageTest] Received Message:{msg}");
-        OnReceivedMessage?.Invoke(msg);
+        public UnityEvent<string> OnReceivedMessage = new UnityEvent<string>();
+    
+        public void ReceiveMessage(string msg)
+        {
+            Debug.Log($"[Debug][MessageTest] Received Message:{msg}");
+            OnReceivedMessage?.Invoke(msg);
+        }
     }
 }
