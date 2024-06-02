@@ -2,8 +2,6 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using MackySoft.Navigathena.SceneManagement.Utilities;
 using MackySoft.Navigathena.SceneManagement.VContainer;
-using UnityEditor.SceneManagement;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
@@ -26,7 +24,7 @@ namespace STak4.brickout.SceneManagement
 
 #if UNITY_EDITOR
             // Reorder root scene.
-            EditorSceneManager.MoveSceneBefore(rootScene, gameObject.scene);
+            UnityEditor.SceneManagement.EditorSceneManager.MoveSceneBefore(rootScene, gameObject.scene);
 #endif
 
             // Build root LifetimeScope container.
