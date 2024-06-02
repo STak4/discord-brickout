@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 # NuGet Packages
 /[Aa]ssets/[Pp]ackages/*
+
+# AWS Secrets
+/[Aa]ssets/AWSUtils/Scripts/AWSSecrets.cs
