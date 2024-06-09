@@ -1,6 +1,6 @@
 using System.IO;
 using Amazon;
-using Unity.Plastic.Newtonsoft.Json;
+//using Newtonsoft.json;
 using UnityEngine;
 
 namespace AWSUtils
@@ -29,7 +29,7 @@ namespace AWSUtils
             }
             
             var json = File.ReadAllText(jsonFilePath);
-            var secrets = JsonConvert.DeserializeObject<AwsSecrets>(json);
+            var secrets = JsonUtility.FromJson<AwsSecrets>(json);
             return secrets;
         }
 
@@ -40,7 +40,7 @@ namespace AWSUtils
         /// <param name="jsonFilePath"></param>
         public static void Save(AwsSecrets secrets, string jsonFilePath)
         {
-            var json = JsonConvert.SerializeObject(secrets);
+            var json = JsonUtility.ToJson(secrets);
             File.WriteAllText(jsonFilePath, json);
         }
     }
