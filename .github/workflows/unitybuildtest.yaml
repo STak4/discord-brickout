@@ -23,7 +23,8 @@ jobs:
       # リポジトリレベルの変数を参照
       - name: Check path
         working-directory: ${{ vars.UNITY_PATH }}
-        run: pwd
+        run: |
+          ls
 
       # Cache
       # - uses: actions/cache@v3
@@ -51,7 +52,7 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          path: ${{ vars.UNITY_PATH }}
+          projectPath: ${{ vars.UNITY_PATH }}
           targetPlatform: WebGL
 
       # Output
