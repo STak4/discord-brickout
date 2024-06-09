@@ -3,7 +3,7 @@ name: Actions 😎
 on:
   push:
     branches:
-      - 'main'
+      - 'unity/build'
   pull_request:
     types: [opened, reopened]
     branches:
