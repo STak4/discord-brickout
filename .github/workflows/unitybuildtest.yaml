@@ -23,22 +23,14 @@ jobs:
       # リポジトリレベルの変数を参照
       - run: echo ${{ vars.UNITY_PATH }}
 
-      # 現在のディレクトリを取得
-      - run: ls
-
-      # Unityプロジェクトへ移動する
-      - run: cd ${{ vars.UNITY_PATH }}     
-
-      # 現在のディレクトリを取得
-      - run: ls     
-
       # Cache
-      # - uses: actions/cache@v3
-      #   with:
-      #     path: Library
-      #     key: Library-${{ hashFiles('${{ vars.UNITYPATH }}Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-      #     restore-keys: |
-      #       Library-
+      - uses: actions/cache@v3
+        working-directory: ${{ vars.UNITY_PATH }}
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
 
       # Test
       # - name: Run tests
@@ -53,6 +45,7 @@ jobs:
       # Build
       - name: Build project
         uses: game-ci/unity-builder@v4
+        working-directory: ${{ vars.UNITY_PATH }}        
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
