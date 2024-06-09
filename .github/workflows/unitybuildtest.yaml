@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - 'main'
+  pull_request:
+    types: [opened]
+    branched:
+      - 'unity/**'
 
 jobs:
   build:
@@ -12,6 +16,9 @@ jobs:
     steps:
       # リポジトリレベルの変数を参照
       - run: echo ${{ vars.UNITY_PATH }}
+
+      # 現在のディレクトリを取得
+      - run: ls
 
       # Unityプロジェクトへ移動する
       - run: cd ${{ vars.UNITY_PATH }}
