@@ -13,6 +13,9 @@ jobs:
       # リポジトリレベルの変数を参照
       - run: echo ${{ vars.UNITY_PATH }}
 
+      # Unityプロジェクトへ移動する
+      - run: cd ${{ vars.UNITY_PATH }}
+
       # Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
