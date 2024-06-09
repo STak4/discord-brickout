@@ -21,7 +21,9 @@ jobs:
           lfs: true
 
       # リポジトリレベルの変数を参照
-      - run: echo ${{ vars.UNITY_PATH }}
+      - name: Check path
+        working-directory: ${{ vars.UNITY_PATH }}
+        run: pwd
 
       # Cache
       # - uses: actions/cache@v3
