@@ -1,6 +1,5 @@
+using System;
 using System.IO;
-using Amazon;
-//using Newtonsoft.json;
 using UnityEngine;
 
 namespace AWSUtils
@@ -8,17 +7,17 @@ namespace AWSUtils
     /// <summary>
     /// AWS認証情報を扱うクラス
     /// </summary>
+    [System.Serializable]
     public class AwsSecrets
     {
-        public string AccessKey { get; set; }
-        public string SecretKey { get; set; }
-        
-        public string BucketName { get; set; }
-        
-        public string RegionName { get; set; }
-        //public RegionEndpoint Region { get; set; }
-        
-        public string DistrubutionId { get; set; }
+        public string AccessKey;
+        public string SecretKey;
+
+        public string BucketName;
+
+        public string RegionName;
+
+        public string DistrubutionId;
 
         public static readonly string DefaultPath = Application.persistentDataPath + "/AWSSECRETS.json";
         public static AwsSecrets Load(string jsonFilePath)
@@ -40,8 +39,10 @@ namespace AWSUtils
         /// <param name="jsonFilePath"></param>
         public static void Save(AwsSecrets secrets, string jsonFilePath)
         {
-            var json = JsonUtility.ToJson(secrets);
+            var json = JsonUtility.ToJson(secrets,true);
             File.WriteAllText(jsonFilePath, json);
+            
+            Debug.Log($"[Debug][Secrets][Save]:{json}");
         }
     }
 }
