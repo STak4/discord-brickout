@@ -5,8 +5,8 @@ on:
     branches:
       - 'main'
   pull_request:
-    types: [opened]
-    branched:
+    types: [opened, reopened]
+    branches:
       - 'unity/**'
 
 jobs:
@@ -14,6 +14,12 @@ jobs:
     name: Build my project ✨
     runs-on: ubuntu-latest
     steps:
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
       # リポジトリレベルの変数を参照
       - run: echo ${{ vars.UNITY_PATH }}
 
@@ -21,13 +27,10 @@ jobs:
       - run: ls
 
       # Unityプロジェクトへ移動する
-      - run: cd ${{ vars.UNITY_PATH }}
+      - run: cd ${{ vars.UNITY_PATH }}     
 
-      # Checkout
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          lfs: true
+      # 現在のディレクトリを取得
+      - run: ls     
 
       # Cache
       # - uses: actions/cache@v3
