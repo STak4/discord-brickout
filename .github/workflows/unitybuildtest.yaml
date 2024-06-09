@@ -5,8 +5,8 @@ on:
     branches:
       - 'main'
   pull_request:
-    types: [opened]
-    branched:
+    types: [opened, reopened]
+    branches:
       - 'unity/**'
 
 jobs:
