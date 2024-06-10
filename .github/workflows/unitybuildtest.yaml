@@ -1,10 +1,10 @@
-name: Actions 😎
+name: Unity Actions🎮
 
 on:
   push:
     branches:
       - 'main'
-      - 'unity/**'
+      - 'unity/build'
   pull_request:
     types: [opened, reopened]
 
@@ -67,8 +67,9 @@ jobs:
           projectPath: ${{ vars.UNITY_PATH }}
           targetPlatform: WebGL
           versioning: Semantic
-          buildName: WebGL
-          buildsPath: Builds
+          # Outputと一致させないと出力されない
+          # buildName: WebGL
+          # buildsPath: Builds
           buildMethod: STak4.Builder.Build
 
       # Output
