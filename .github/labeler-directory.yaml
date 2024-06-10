@@ -10,7 +10,7 @@ documentation:
 
 unity:
   - changed-files:
-      - any-glob-to-any-file: '${{ vars.UNITY_PATH }}/**'
+      - any-glob-to-any-file: 'UProject/**'
 
 frontend:
   - changed-files:
