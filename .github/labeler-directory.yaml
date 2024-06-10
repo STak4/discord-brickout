@@ -1,0 +1,21 @@
+# Directory pattern
+# https://qiita.com/Ry0xi/items/cf65be4917496be97870
+actions:
+  - changed-files:
+      - any-glob-to-any-file: '.github/**'
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: 'docs/**'
+
+unity:
+  - changed-files:
+      - any-glob-to-any-file: '${{ vars.UNITY_PATH }}/**'
+
+frontend:
+  - changed-files:
+      - any-glob-to-any-file: 'client/**'
+
+backend:
+  - changed-files:
+      - any-glob-to-any-file: 'backend/**'    
