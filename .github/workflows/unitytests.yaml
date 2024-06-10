@@ -1,17 +1,17 @@
-name: Unity Actions🎮
+name: Unity Tests🧪
 
 on:
   push:
     branches:
       - 'main'
-      - 'unity/build'
   pull_request:
     types: [opened, synchronize]
 
 jobs:
-  build:
-    name: Build my project ✨
+  test:
+    name: Test Runner 🧪
     runs-on: ubuntu-latest
+
     steps:
       # Checkout
       - name: Checkout repository
@@ -47,33 +47,12 @@ jobs:
           nugetforunity restore ${{ vars.UNITY_PATH }}            
 
       # Test
-      # - name: Run tests
-      #   uses: game-ci/unity-test-runner@v4
-      #   env:
-      #     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-      #     UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-      #     UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-      #   with:
-      #     githubToken: ${{ github.token }}
-
-      # Build
-      - name: Build project
-        uses: game-ci/unity-builder@v4
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
+          githubToken: ${{ github.token }}
           projectPath: ${{ vars.UNITY_PATH }}
-          targetPlatform: WebGL
-          versioning: Semantic
-          # Outputと一致させないと出力されない
-          # buildName: WebGL
-          # buildsPath: Builds
-          buildMethod: STak4.Builder.Build
-
-      # Output
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Build
-          path: build
