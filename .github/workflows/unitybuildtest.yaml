@@ -3,11 +3,10 @@ name: Actions 😎
 on:
   push:
     branches:
-      - 'unity/build'
+      - 'main'
+      - 'unity/**'
   pull_request:
     types: [opened, reopened]
-    branches:
-      - 'unity/**'
 
 jobs:
   build:
@@ -36,7 +35,7 @@ jobs:
 
       # dotnetを指定
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 7.0.x
 
