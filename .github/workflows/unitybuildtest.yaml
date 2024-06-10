@@ -37,7 +37,6 @@ jobs:
         run: |
           dotnet tool install --global NuGetForUnity.Cli
           mkdir -p ${{ vars.UNITY_PATH }}/Assets/Packages
-          // 依存パッケージを復元する
           nugetforunity restore ${{ vars.UNITY_PATH }}
 
       # Cache
