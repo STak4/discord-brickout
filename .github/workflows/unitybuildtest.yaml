@@ -27,12 +27,12 @@ jobs:
           ls
 
       # Cache
-      # - uses: actions/cache@v3
-      #   with:
-      #     path: Library
-      #     key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-      #     restore-keys: |
-      #       Library-
+      - uses: actions/cache@v4
+        with:
+          path: ${{ vars.UNITY_PATH }}/Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
 
       # Test
       # - name: Run tests
@@ -54,6 +54,7 @@ jobs:
         with:
           projectPath: ${{ vars.UNITY_PATH }}
           targetPlatform: WebGL
+          buildMethod: STak4.Builder.Build
 
       # Output
       - uses: actions/upload-artifact@v3
