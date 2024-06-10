@@ -1,13 +1,12 @@
-name: Actions 😎
+name: Unity Actions🎮
 
 on:
   push:
     branches:
+      - 'main'
       - 'unity/build'
   pull_request:
     types: [opened, reopened]
-    branches:
-      - 'unity/**'
 
 jobs:
   build:
@@ -34,6 +33,19 @@ jobs:
           restore-keys: |
             Library-
 
+      # dotnetを指定
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 7.0.x
+
+      # NuGet For Unityをインストール&復元
+      - name: Setup NuGetForUnity
+        run: |
+          dotnet tool install --global NuGetForUnity.Cli
+          mkdir -p ${{ vars.UNITY_PATH }}/Assets/Packages
+          nugetforunity restore ${{ vars.UNITY_PATH }}            
+
       # Test
       # - name: Run tests
       #   uses: game-ci/unity-test-runner@v4
@@ -54,10 +66,14 @@ jobs:
         with:
           projectPath: ${{ vars.UNITY_PATH }}
           targetPlatform: WebGL
+          versioning: Semantic
+          # Outputと一致させないと出力されない
+          # buildName: WebGL
+          # buildsPath: Builds
           buildMethod: STak4.Builder.Build
 
       # Output
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Build
           path: build
