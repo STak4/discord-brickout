@@ -8,9 +8,12 @@ on:
     types: [opened, reopened]
 
 jobs:
-  build:
+  test:
     name: Test Runner 🧪
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
       # Checkout
       - name: Checkout repository
