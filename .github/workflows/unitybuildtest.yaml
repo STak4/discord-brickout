@@ -54,6 +54,7 @@ jobs:
         with:
           projectPath: ${{ vars.UNITY_PATH }}
           targetPlatform: WebGL
+          buildMethod: STak4.Builder.Build
 
       # Output
       - uses: actions/upload-artifact@v3
