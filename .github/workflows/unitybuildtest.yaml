@@ -26,6 +26,20 @@ jobs:
         run: |
           ls
 
+      # dotnetを指定
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+
+      # NuGet For Unityをインストール&復元
+      - name: Setup NuGetForUnity
+        run: |
+          dotnet tool install --global NuGetForUnity.Cli
+          mkdir -p ${{ vars.UNITY_PATH }}/Assets/Packages
+          // 依存パッケージを復元する
+          nugetforunity restore ${{ vars.UNITY_PATH }}
+
       # Cache
       - uses: actions/cache@v4
         with:
