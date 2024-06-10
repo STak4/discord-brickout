@@ -26,6 +26,14 @@ jobs:
         run: |
           ls
 
+      # Cache
+      - uses: actions/cache@v4
+        with:
+          path: ${{ vars.UNITY_PATH }}/Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
       # dotnetを指定
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
@@ -37,15 +45,7 @@ jobs:
         run: |
           dotnet tool install --global NuGetForUnity.Cli
           mkdir -p ${{ vars.UNITY_PATH }}/Assets/Packages
-          nugetforunity restore ${{ vars.UNITY_PATH }}
-
-      # Cache
-      - uses: actions/cache@v4
-        with:
-          path: ${{ vars.UNITY_PATH }}/Library
-          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-          restore-keys: |
-            Library-
+          nugetforunity restore ${{ vars.UNITY_PATH }}            
 
       # Test
       # - name: Run tests
@@ -70,7 +70,7 @@ jobs:
           buildMethod: STak4.Builder.Build
 
       # Output
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Build
           path: build
