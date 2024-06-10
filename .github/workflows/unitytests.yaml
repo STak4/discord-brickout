@@ -11,8 +11,6 @@ jobs:
   test:
     name: Test Runner 🧪
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       # Checkout
