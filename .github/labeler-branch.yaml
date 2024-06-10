@@ -1,0 +1,17 @@
+# https://qiita.com/ucan-lab/items/4b02dec969df399253f7
+feature:
+  - head-branch: ['^feature']
+bug:
+  - head-branch: ['^bug']
+refactor:
+  - head-branch: ['^refactor']
+document:
+  - head-branch: ['^doc']
+unity:
+  - head-branch: ['^unity']
+frontend:
+  - head-branch: ['^frontend']
+backend:
+  - head-branch: ['^backend']
+actions:
+  - head-branch: ['^actions']
