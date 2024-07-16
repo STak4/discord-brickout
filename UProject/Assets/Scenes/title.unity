@@ -529,8 +529,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enter your name...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9489f1fe968eb614ca8b8b3b777d0fa4, type: 2}
+  m_sharedMaterial: {fileID: 21977149428884408, guid: 9489f1fe968eb614ca8b8b3b777d0fa4,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -685,8 +686,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "UserName\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9489f1fe968eb614ca8b8b3b777d0fa4, type: 2}
+  m_sharedMaterial: {fileID: 21977149428884408, guid: 9489f1fe968eb614ca8b8b3b777d0fa4,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1099,8 +1101,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 866a60afcf96b7c40a5c95f87da5bb1e, type: 2}
-  m_sharedMaterial: {fileID: -5561232773109438859, guid: 866a60afcf96b7c40a5c95f87da5bb1e,
+  m_fontAsset: {fileID: 11400000, guid: 9489f1fe968eb614ca8b8b3b777d0fa4, type: 2}
+  m_sharedMaterial: {fileID: 21977149428884408, guid: 9489f1fe968eb614ca8b8b3b777d0fa4,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1310,8 +1312,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Title
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 866a60afcf96b7c40a5c95f87da5bb1e, type: 2}
-  m_sharedMaterial: {fileID: -5561232773109438859, guid: 866a60afcf96b7c40a5c95f87da5bb1e,
+  m_fontAsset: {fileID: 11400000, guid: 9489f1fe968eb614ca8b8b3b777d0fa4, type: 2}
+  m_sharedMaterial: {fileID: 21977149428884408, guid: 9489f1fe968eb614ca8b8b3b777d0fa4,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
