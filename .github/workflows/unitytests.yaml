@@ -54,5 +54,6 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
+          targetPlatform: WebGL
           githubToken: ${{ github.token }}
           projectPath: ${{ vars.UNITY_PATH }}
