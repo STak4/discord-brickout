@@ -1,4 +1,9 @@
+using System;
+using System.Linq;
 using MackySoft.Navigathena.SceneManagement;
+using STak4.brickout.Multiplayer;
+using Unity.Services.Authentication;
+using Unity.Services.Lobbies;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -19,6 +24,22 @@ namespace STak4.brickout.Presenter
 
         private async void OnBack()
         {
+            var sessions = await LobbyService.Instance.GetJoinedLobbiesAsync();
+            if (sessions.Any())
+            {
+                try
+                {
+                    var session = await LobbyService.Instance.GetLobbyAsync(sessions[0]);
+                    var leaver = new UgsSessionLeaver(session);
+                    await leaver.Leave();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+            }
+
             await GlobalSceneNavigator.Instance.Pop();
         }
     }

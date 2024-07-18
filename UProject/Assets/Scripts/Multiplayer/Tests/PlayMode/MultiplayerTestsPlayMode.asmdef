@@ -1,0 +1,26 @@
+{
+    "name": "MultiplayerTestsPlayMode",
+    "rootNamespace": "STak4.brickout",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "brickout",
+        "Unity.Services.Authentication",
+        "Unity.Services.Core",
+        "Unity.Services.Core.Environments",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
