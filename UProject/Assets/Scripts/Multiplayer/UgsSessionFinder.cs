@@ -18,6 +18,11 @@ namespace STak4.brickout.Multiplayer
             _tokenSource = new CancellationTokenSource();
         }
 
+        public UniTask<QueryResponse> Find(QueryLobbiesOptions options, CancellationToken token = default)
+        {
+            return Lobbies.Instance.QueryLobbiesAsync(options).AsUniTask().AttachExternalCancellation(token);
+        }
+
         public async UniTaskVoid PollForFind(QueryLobbiesOptions options, Action<List<Lobby>> onSessionUpdated, float pollIntervalSeconds = 3.0f)
         {
             while (!_tokenSource.Token.IsCancellationRequested)

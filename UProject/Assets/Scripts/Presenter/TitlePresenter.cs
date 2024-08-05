@@ -6,6 +6,9 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
 using VContainer.Unity;
+#if UNITY_EDITOR
+using ParrelSync;
+#endif
 
 namespace STak4.brickout.Presenter
 {
@@ -22,6 +25,14 @@ namespace STak4.brickout.Presenter
         {
             _view.NextButton.onClick.AddListener(OnNext);
             _view.NameInput.onEndEdit.AddListener(OnEndEdit);
+            
+#if UNITY_EDITOR
+            // ParrelSyncのArgumentをプレイヤー名にする
+            if (ClonesManager.IsClone())
+            {
+                _view.NameInput.text = ClonesManager.GetArgument();
+            }
+#endif            
 
             // UGSの初期化
             if (UnityServices.State != ServicesInitializationState.Initialized)

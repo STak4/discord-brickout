@@ -8,32 +8,38 @@ namespace STak4.brickout.Multiplayer.Tests.PlayMode
 {
     public class AuthTests
     {
+        public readonly string ProfileName = "tester1";
+        [SetUp]
+        public async void Setup()
+        {
+            if (UnityServices.State != ServicesInitializationState.Initialized)
+            {
+                var initializer = new UgsInitializer(new UgsEnvironment(), new UgsProfile(ProfileName));
+                await initializer.InitializeTask();
+            }
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            if (AuthenticationService.Instance.IsSignedIn)
+            {
+                AuthenticationService.Instance.SignOut();
+            }
+        }
+        
         [Test]
         public async Task SignInPass()
         {
-            var profileName = "tester1";
-            if (UnityServices.State != ServicesInitializationState.Initialized)
-            {
-                var initializer = new UgsInitializer(new UgsEnvironment(), new UgsProfile(profileName));
-                await initializer.InitializeTask();
-            }
-
             var auth = new UgsAuth();
             await auth.SignIn();
             Assert.That(AuthenticationService.Instance.IsSignedIn, Is.EqualTo(true));
-            Assert.That(AuthenticationService.Instance.Profile, Is.EqualTo(profileName));
+            Assert.That(AuthenticationService.Instance.Profile, Is.EqualTo(ProfileName));
         }
 
         [Test]
         public async Task SignOutPass()
         {
-            var profileName = "tester1";
-            if (UnityServices.State != ServicesInitializationState.Initialized)
-            {
-                var initializer = new UgsInitializer(new UgsEnvironment(), new UgsProfile(profileName));
-                await initializer.InitializeTask();
-            }
-
             var auth = new UgsAuth();
             if (!AuthenticationService.Instance.IsSignedIn)
             {
@@ -47,13 +53,6 @@ namespace STak4.brickout.Multiplayer.Tests.PlayMode
         [Test]
         public async Task SwitchProfilePass()
         {
-            var firstProfile = "tester1";
-            if (UnityServices.State != ServicesInitializationState.Initialized)
-            {
-                var initializer = new UgsInitializer(new UgsEnvironment(), new UgsProfile(firstProfile));
-                await initializer.InitializeTask();
-            }
-
             var secondProfile = "tester2";
             var auth = new UgsAuth();
             if (!AuthenticationService.Instance.IsSignedIn)

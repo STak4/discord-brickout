@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using MackySoft.Navigathena.SceneManagement;
 using STak4.brickout.Multiplayer;
 using STak4.brickout.UI;
@@ -26,9 +27,40 @@ namespace STak4.brickout.Presenter
         {
             _view.NextButton.onClick.AddListener(OnNext);
             _view.CreateButton.onClick.AddListener(OnCreate);
-            StartPollSessions();
+            _view.RefreshButton.onClick.AddListener(OnRefresh);
+            
+            _view.MessageText.color = Color.white;
+            _view.MessageText.text = "";
+            // 手動更新に変更
+            //StartPollSessions();
         }
 
+        private async void OnRefresh()
+        {
+            QueryLobbiesOptions options = new QueryLobbiesOptions();
+            options.Count = 25;
+
+            // Filter for open lobbies only
+            options.Filters = new List<QueryFilter>()
+            {
+                new QueryFilter(
+                    field: QueryFilter.FieldOptions.AvailableSlots,
+                    op: QueryFilter.OpOptions.GT,
+                    value: "0")
+            };
+
+            // Order by newest lobbies first
+            options.Order = new List<QueryOrder>()
+            {
+                new QueryOrder(
+                    asc: false,
+                    field: QueryOrder.FieldOptions.Created)
+            };
+
+            var response = await _finder.Find(options);
+            OnSessionUpdated(response.Results);
+        }
+        
         private void StartPollSessions()
         {
             QueryLobbiesOptions options = new QueryLobbiesOptions();
@@ -75,7 +107,7 @@ namespace STak4.brickout.Presenter
                 var session = GameObject.Instantiate(_view.SessionViewPrefab, _view.SessionViewParent);
                 session.Lobby = l;
                 session.OnJoinClick.AddListener(OnJoin);
-                _sessionViews.Add(session);                
+                _sessionViews.Add(session);
             }
         }
 
@@ -105,17 +137,23 @@ namespace STak4.brickout.Presenter
 
         private async void OnJoin(Lobby lobby)
         {
-            var joiner = new UgsSessionJoiner(lobby);
+            _view.MessageText.color = Color.white;
+            _view.MessageText.text = $"[Lobby] Joining to {lobby.Name}";
             try
             {
+                lobby = await LobbyService.Instance.GetLobbyAsync(lobby.Id);
+                var joiner = new UgsSessionJoiner(lobby);
                 await joiner.JoinLobby();
                 Debug.Log($"[UGS][Lobby] Session joined. lobby:{lobby.Name}, id:{lobby.Id}");
                 OnNext();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                Debug.Log($"[UGS][Lobby] Failed to join lobby. {e.Message}");
+                _view.MessageText.color = Color.red;
+                _view.MessageText.text = $"[Lobby] Failed to join to {lobby.Name}. Reason:{e.Message}";
+                OnRefresh();
+                return;
             }
         }
     }

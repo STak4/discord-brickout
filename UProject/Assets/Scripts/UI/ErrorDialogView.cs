@@ -36,9 +36,9 @@ namespace STak4.brickout
         private void HandleLog(string logString, string stackTrace, LogType type)
         {
             var message = $"[{type}]{logString}";
-            Debug.Log($"[Debug] Handle log. {message}");
             if (type == LogType.Exception || type == LogType.Error)
             {
+                Debug.Log($"[Debug] Handle log. {message}");
                 OnModalOpen(new ModalContext(ModalContext.ModalType.Error,0,$"{message}"));
             }
         }

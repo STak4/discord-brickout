@@ -22,7 +22,16 @@ namespace STak4.brickout.Multiplayer
             //Ensure you sign-in before calling Authentication Instance
             //See IAuthenticationService interface
             string playerId = AuthenticationService.Instance.PlayerId;
-            return LobbyService.Instance.RemovePlayerAsync(_lobby.Id, playerId).AsUniTask().AttachExternalCancellation(token);
+            
+            // 自分しかいない場合部屋を削除する
+            if (_lobby.Players.Count == 1)
+            {
+                return LobbyService.Instance.DeleteLobbyAsync(_lobby.Id).AsUniTask().AttachExternalCancellation(token);
+            }
+            else
+            {
+                return LobbyService.Instance.RemovePlayerAsync(_lobby.Id, playerId).AsUniTask().AttachExternalCancellation(token);
+            }
         }
     }
 }

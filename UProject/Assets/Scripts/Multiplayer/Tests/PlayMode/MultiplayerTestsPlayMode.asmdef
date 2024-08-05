@@ -8,7 +8,8 @@
         "Unity.Services.Authentication",
         "Unity.Services.Core",
         "Unity.Services.Core.Environments",
-        "UniTask"
+        "UniTask",
+        "Unity.Services.Lobbies"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

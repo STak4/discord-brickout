@@ -32,10 +32,11 @@ namespace STak4.brickout.Presenter
                     var session = await LobbyService.Instance.GetLobbyAsync(sessions[0]);
                     var leaver = new UgsSessionLeaver(session);
                     await leaver.Leave();
+                    Debug.Log($"[InGame]Leave Session");
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    Debug.LogError($"[InGame] Failed to leave Session. {e.Message}");
                     throw;
                 }
             }

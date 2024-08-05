@@ -23,6 +23,11 @@ namespace STak4.brickout
             JoinButton.onClick.AddListener(OnJoin);
         }
 
+        private void Update()
+        {
+            PlayerCountText.text = $"{Lobby.Players.Count}/{Lobby.MaxPlayers}";
+        }
+
         public void Dispose()
         {
             JoinButton.onClick.RemoveListener(OnJoin);
